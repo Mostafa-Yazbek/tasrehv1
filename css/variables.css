@@ -1,0 +1,28 @@
+/* Musarrah reference variables: copied from the supplied design system and kept framework-free. */
+@font-face { font-family: "thmanyahserifdisplay-black"; src: url("../assets/fonts/thmanyahserifdisplay-Black.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "thmanyahserifdisplay-bold"; src: url("../assets/fonts/thmanyahserifdisplay-Bold.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "thmanyahseriftext"; src: url("../assets/fonts/thmanyahseriftext-Regular.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "thmanyahseriftext-medium"; src: url("../assets/fonts/thmanyahseriftext-Medium.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "thmanyahseriftext-bold"; src: url("../assets/fonts/thmanyahseriftext-Bold.woff2") format("woff2"); font-display: swap; }
+
+:root {
+  --font-display: "thmanyahserifdisplay-black", serif;
+  --font-display-bold: "thmanyahserifdisplay-bold", serif;
+  --font-title: "thmanyahseriftext-bold", serif;
+  --font-body: "thmanyahseriftext", serif;
+  --font-body-medium: "thmanyahseriftext-medium", serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --text-2xs: .75rem; --text-xs: .8rem; --text-sm: .875rem; --text-md: .94rem; --text-base: 1rem; --text-lg: 1.1rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
+  --leading-none: 1; --leading-tight: 1.15; --leading-normal: 1.5;
+  --color-white: #fff; --color-pineal-50: #f2f9f8; --color-pineal-100: #d9eee9; --color-pineal-500: #237366; --color-pineal-700: #064239; --color-pineal-900: #032c25;
+  --color-umber-50: #ead6da; --color-umber-700: #4a151e; --color-golden-wheat-50: #f8f5ee; --color-golden-wheat-100: #efe7d6; --color-golden-wheat-200: #e1d2b5; --color-golden-wheat-300: #d0bb92; --color-golden-wheat-500: #bca375;
+  --color-charcoal-300: #83949b; --color-charcoal-500: #5f747c; --color-charcoal-700: #495760;
+  --color-bg: var(--color-golden-wheat-100); --color-surface: var(--color-white); --color-surface-sunken: var(--color-golden-wheat-50);
+  --color-brand: var(--color-pineal-700); --color-brand-hover: var(--color-pineal-900); --color-brand-soft: var(--color-pineal-50); --color-brand-soft-hover: var(--color-pineal-100); --color-on-brand: var(--color-golden-wheat-100);
+  --color-text: var(--color-pineal-700); --color-text-muted: var(--color-charcoal-700); --color-text-faint: var(--color-charcoal-300); --color-danger-strong: var(--color-umber-700);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-7: 28px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+  --radius-2xs: 6px; --radius-sm: 10px; --radius-lg: 14px; --radius-xl: 16px; --radius-2xl: 20px; --radius-pill: 100px;
+  --border-width: 2px; --border-divider: 1px solid var(--color-pineal-50);
+  --shadow-sm: 0 1px 3px rgba(6,66,57,.05), 0 4px 16px rgba(6,66,57,.05); --shadow-md: 0 6px 22px rgba(6,66,57,.08), 0 2px 6px rgba(6,66,57,.04); --shadow-lg: 0 14px 40px rgba(6,66,57,.12), 0 0 0 1px rgba(6,66,57,.03);
+  --transition-fast: 150ms cubic-bezier(.23,1,.32,1); --transition-base: 200ms cubic-bezier(.23,1,.32,1);
+}

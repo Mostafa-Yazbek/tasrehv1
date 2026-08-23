@@ -1,0 +1,18 @@
+/* شاشة الدخول الأولية لتصريح الحفر. */
+[data-excavation-request][hidden], .access-error[hidden] { display: none !important; }
+.excavation-access { position: relative; width: min(570px, 100%); padding: clamp(var(--space-6), 6vw, var(--space-9)); margin: var(--space-10) auto; overflow: hidden; text-align: center; border: 1px solid rgba(188,163,117,.42); box-shadow: var(--shadow-md); }
+.excavation-access::before { content: ""; position: absolute; top: -80px; left: -75px; width: 190px; height: 190px; background: var(--color-brand-soft); border-radius: 50%; opacity: .78; }
+.excavation-access > * { position: relative; z-index: 1; }
+.excavation-access-mark { display: grid; width: 62px; height: 62px; place-items: center; margin: 0 auto var(--space-3); background: var(--color-brand); border-radius: 50%; box-shadow: 0 0 0 7px var(--color-brand-soft); }
+.excavation-access-mark img { width: 28px; height: 28px; filter: brightness(0) invert(1); }
+.access-overline { margin: 0 0 var(--space-2); color: var(--color-golden-wheat-500); font-family: var(--font-title); font-size: var(--text-2xs); letter-spacing: .08em; }
+.excavation-access h2 { margin: 0; color: var(--color-brand); font-family: var(--font-display); font-size: clamp(1.65rem, 4vw, 2.15rem); }
+.access-lead { max-width: 395px; margin: var(--space-2) auto 0; color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.75; }
+.excavation-access-notice { max-width: 440px; padding: var(--space-3) var(--space-4); margin: var(--space-5) auto var(--space-6); color: var(--color-text-muted); background: var(--color-golden-wheat-50); border-right: 3px solid var(--color-golden-wheat-500); border-radius: var(--radius-sm); font-size: var(--text-sm); line-height: 1.75; text-align: right; }
+.excavation-access-notice strong { color: var(--color-brand); }
+.excavation-login-form { display: grid; gap: var(--space-4); max-width: 410px; margin: 0 auto; text-align: right; }
+.excavation-login-form .field-input { background: var(--color-golden-wheat-50); }
+.excavation-login-form .btn { width: 100%; min-height: 52px; margin-top: var(--space-2); }
+.access-error { padding: var(--space-3); margin: 0; color: var(--color-umber-700); background: var(--color-umber-50); border-radius: var(--radius-sm); font-size: var(--text-sm); }
+@media (max-width: 640px) { .excavation-access { padding: var(--space-6) var(--space-4); margin: var(--space-6) auto; }.excavation-access-notice { text-align: right; } }
+
