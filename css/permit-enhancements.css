@@ -1,0 +1,30 @@
+/* Additions for permit machinery, rubble type, the shared success message, and the larger permit logo. */
+.permit-topbar { min-height: 100px; }
+.compact-brand img { width: 68px; height: 68px; object-fit: contain; }
+.machinery-subsection { margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px dashed var(--color-golden-wheat-300); }
+.machinery-section-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-3); }
+.machinery-section-head h3 { margin: 0; color: var(--color-brand); font-family: var(--font-title); font-size: var(--text-lg); }
+.machinery-section-head p { margin: 4px 0 0; color: var(--color-text-faint); font-size: var(--text-xs); }
+.machinery-table { min-width: 890px; }
+.rubble-estimate-grid { max-width: 900px; }
+.permit-success-open { overflow: hidden; }
+.permit-success-modal { position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: var(--space-5); background: rgba(3,36,31,.62); backdrop-filter: blur(6px); }
+.permit-success-card { width: min(460px,100%); padding: clamp(var(--space-6),6vw,var(--space-9)); color: var(--color-text); background: var(--color-surface); border: 1px solid rgba(188,163,117,.7); border-radius: var(--radius-xl); box-shadow: 0 30px 80px rgba(0,0,0,.3); text-align: center; animation: permit-success-enter .25s var(--transition-base) both; }
+.permit-success-mark { display: grid; width: 68px; height: 68px; place-items: center; margin: 0 auto var(--space-4); color: var(--color-on-brand); background: var(--color-brand); border: 6px solid var(--color-brand-soft); border-radius: 50%; font-family: Arial,sans-serif; font-size: 2rem; font-weight: bold; }
+.permit-success-eyebrow { color: var(--color-golden-wheat-500); font-family: var(--font-title); font-size: var(--text-xs); }
+.permit-success-card h2 { margin: var(--space-2) 0; color: var(--color-brand); font-family: var(--font-display); font-size: var(--text-2xl); }
+.permit-success-card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-sm); }
+.permit-number { display: grid; gap: 4px; padding: var(--space-4); margin: var(--space-6) 0; background: var(--color-golden-wheat-50); border: 1px dashed var(--color-golden-wheat-400); border-radius: var(--radius-lg); }
+.permit-number span { color: var(--color-text-faint); font-size: var(--text-xs); }
+.permit-number strong { direction: ltr; color: var(--color-brand); font-family: var(--font-mono); font-size: var(--text-xl); }
+.permit-success-close { display: inline-flex; align-items: center; justify-content: center; min-width: 112px; min-height: 42px; padding: 0 var(--space-5); color: var(--color-on-brand); background: var(--color-brand); border: 0; border-radius: var(--radius-pill); font-family: var(--font-title); font-size: var(--text-sm); transition: background var(--transition-fast), transform var(--transition-fast); }
+.permit-success-close:hover { background: var(--color-brand-hover); }.permit-success-close:active { transform: scale(.97); }
+.home-success-banner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-4) var(--space-5); margin: 0 0 var(--space-5); color: var(--color-brand); background: var(--color-brand-soft); border: 1px solid var(--color-golden-wheat-300); border-radius: var(--radius-lg); }
+.home-success-banner div { display: grid; gap: 3px; }.home-success-banner strong { font-family: var(--font-title); }.home-success-banner span { color: var(--color-text-muted); font-size: var(--text-xs); }.home-success-banner b { direction: ltr; color: var(--color-brand); font-family: var(--font-mono); }
+.home-success-banner button { display: grid; width: 32px; height: 32px; place-items: center; color: var(--color-brand); background: var(--color-surface); border: 1px solid var(--color-golden-wheat-300); border-radius: 50%; font-size: 1.25rem; line-height: 1; }
+@keyframes permit-success-enter { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 700px) { .permit-topbar { min-height: 82px; padding: var(--space-3) var(--space-4); }.compact-brand img { width: 52px; height: 52px; }.machinery-section-head { flex-direction: column; }.machinery-section-head .btn { width: 100%; }.home-success-banner { align-items: flex-start; }.permit-success-card { padding: var(--space-6) var(--space-5); } }
+.permit-success-close {
+  position: relative;
+  bottom: 10px;
+}

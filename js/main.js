@@ -23,3 +23,124 @@
   document.querySelectorAll("[data-transport-form]").forEach(function (form) { form.addEventListener("submit", function (event) { event.preventDefault(); var old = form.querySelector(".form-status"); if (old) old.remove(); var status = document.createElement("p"); status.className = "form-status"; status.setAttribute("role", "status"); status.textContent = "تم حفظ البيانات محليًا في هذه الواجهة التجريبية."; form.appendChild(status); }); });
   updateRows();
 })();
+
+/* Enhancements: machinery repeater, rubble type, centered permit success card and home confirmation. */
+(function () {
+  "use strict";
+  var MAX_ROWS = 20;
+  var pagePrefix = window.location.pathname.indexOf("/pages/") !== -1 ? "../" : "";
+  if (!document.querySelector('link[data-permit-enhancements]')) {
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = pagePrefix + "css/permit-enhancements.css";
+    css.setAttribute("data-permit-enhancements", "");
+    document.head.appendChild(css);
+  }
+
+  function machineryRow(index) {
+    return '<tr data-machinery-row><td data-label="نوع الآلية"><input class="field-input" type="text" name="machinery[' + index + '][type]" placeholder="مثال: حفارة"></td><td data-label="العدد"><input class="field-input mono" type="number" min="1" step="1" name="machinery[' + index + '][count]"></td><td data-label="ارتفاع الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[' + index + '][height]" placeholder="متر"></td><td data-label="وزن الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[' + index + '][weight]" placeholder="كغ"></td><td data-label="ملاحظات"><input class="field-input" type="text" name="machinery[' + index + '][notes]"></td><td data-label="حذف"><button class="repeater-remove" type="button" data-remove-machinery aria-label="حذف صف الآلية">×</button></td></tr>';
+  }
+
+  function updateMachineryRows() {
+    var rows = document.querySelectorAll("[data-machinery-rows] [data-machinery-row]");
+    var addButton = document.querySelector("[data-add-machinery]");
+    var empty = document.querySelector("[data-machinery-empty]");
+    rows.forEach(function (row, index) {
+      row.querySelectorAll("input").forEach(function (field) {
+        var key = field.name.match(/\]\[(type|count|height|weight|notes)\]$/);
+        if (key) field.name = "machinery[" + index + "][" + key[1] + "]";
+      });
+    });
+    if (addButton) addButton.disabled = rows.length >= MAX_ROWS;
+    if (empty) empty.hidden = rows.length > 0;
+  }
+
+  function addMachinerySection() {
+    var materialsRows = document.querySelector("[data-materials-rows]");
+    if (!materialsRows || document.querySelector("[data-machinery-rows]")) return;
+    var card = materialsRows.closest(".wizard-card");
+    var actions = card && card.querySelector(".wizard-actions");
+    if (!card || !actions) return;
+    var section = document.createElement("section");
+    section.className = "machinery-subsection";
+    section.innerHTML = '<div class="machinery-section-head"><div><h3>الآليات المصرح بنقلها</h3><p>أضف كل آلية في صف مستقل ضمن الطلب نفسه.</p></div><button type="button" class="btn btn-soft btn-sm transport-add-row" data-add-machinery><span aria-hidden="true">+</span> إضافة آلية</button></div><div class="transport-table-wrap"><table class="transport-material-table machinery-table"><thead><tr><th>نوع الآلية</th><th>العدد</th><th>ارتفاع الآلية</th><th>وزن الآلية</th><th>ملاحظات</th><th aria-label="حذف"></th></tr></thead><tbody data-machinery-rows><tr data-machinery-row><td data-label="نوع الآلية"><input class="field-input" type="text" name="machinery[0][type]" placeholder="مثال: حفارة"></td><td data-label="العدد"><input class="field-input mono" type="number" min="1" step="1" name="machinery[0][count]"></td><td data-label="ارتفاع الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[0][height]" placeholder="متر"></td><td data-label="وزن الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[0][weight]" placeholder="كغ"></td><td data-label="ملاحظات"><input class="field-input" type="text" name="machinery[0][notes]"></td><td data-label="حذف"><button class="repeater-remove" type="button" data-remove-machinery aria-label="حذف صف الآلية">×</button></td></tr></tbody></table><p class="repeater-empty" data-machinery-empty hidden>لا توجد آليات مضافة حاليًا.</p></div>';
+    actions.insertAdjacentElement("beforebegin", section);
+  }
+
+  function addRubbleTypeField() {
+    var grid = document.querySelector(".rubble-estimate-grid");
+    if (!grid || document.getElementById("rubble_type")) return;
+    var field = document.createElement("div");
+    field.className = "field";
+    field.innerHTML = '<label class="field-label" for="rubble_type">نوع الأنقاض</label><input id="rubble_type" name="rubble_type" class="field-input" type="text" placeholder="مثال: حجارة، إسمنت، أخشاب" />';
+    grid.insertAdjacentElement("afterbegin", field);
+  }
+
+  addMachinerySection();
+  addRubbleTypeField();
+  updateMachineryRows();
+
+  var addMachinery = document.querySelector("[data-add-machinery]");
+  var machineryRows = document.querySelector("[data-machinery-rows]");
+  if (addMachinery && machineryRows) addMachinery.addEventListener("click", function () {
+    var count = machineryRows.querySelectorAll("[data-machinery-row]").length;
+    if (count < MAX_ROWS) {
+      machineryRows.insertAdjacentHTML("beforeend", machineryRow(count));
+      updateMachineryRows();
+    }
+  });
+  document.addEventListener("click", function (event) {
+    var remove = event.target.closest("[data-remove-machinery]");
+    if (!remove) return;
+    var row = remove.closest("[data-machinery-row]");
+    if (row) { row.remove(); updateMachineryRows(); }
+  });
+
+  function makePermitNumber() {
+    var now = new Date();
+    var date = String(now.getFullYear()) + String(now.getMonth() + 1).padStart(2, "0") + String(now.getDate()).padStart(2, "0");
+    return "MSR-" + date + "-" + Math.floor(1000 + Math.random() * 9000);
+  }
+
+  function permitType(form) {
+    if (form.matches("[data-excavation-request]")) return "تصريح الحفر";
+    return document.title.indexOf("الأنقاض") !== -1 ? "تصريح نقل الأنقاض" : "طلب تصريح نقل مواد ومعدات بناء";
+  }
+
+  function queueHomeSuccess(type) {
+    var number = makePermitNumber();
+    try { sessionStorage.setItem("musarrah-last-permit", JSON.stringify({ type: type, number: number })); } catch (error) {}
+    window.location.assign(pagePrefix + "index.html");
+  }
+
+  document.querySelectorAll("[data-transport-form], [data-static-form]").forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var legacyStatus = form.querySelector(".form-status");
+      if (legacyStatus) legacyStatus.remove();
+      queueHomeSuccess(permitType(form));
+    });
+  });
+
+  function showHomeSuccess() {
+    var host = document.querySelector(".home-card");
+    if (!host) return;
+    var saved;
+    try { saved = JSON.parse(sessionStorage.getItem("musarrah-last-permit") || "null"); } catch (error) { saved = null; }
+    if (!saved || document.querySelector("[data-permit-success-modal]")) return;
+    var modal = document.createElement("div");
+    modal.className = "permit-success-modal";
+    modal.setAttribute("data-permit-success-modal", "");
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.innerHTML = '<div class="permit-success-card"><div class="permit-success-mark" aria-hidden="true">✓</div><span class="permit-success-eyebrow">تم استلام طلبك</span><h2>تم إرسال التصريح بنجاح</h2><p>سيتم مراجعة <strong>' + saved.type + '</strong> من الجهة المختصة.</p><div class="permit-number"><span>رقم التصريح</span><strong>' + saved.number + '</strong></div> <button type="button" class="permit-success-close" data-close-success>إغلاق</button></div>';
+    document.body.appendChild(modal);
+    document.body.classList.add("permit-success-open");
+    modal.querySelector("[data-close-success]").addEventListener("click", function () {
+      modal.remove();
+      document.body.classList.remove("permit-success-open");
+      try { sessionStorage.removeItem("musarrah-last-permit"); } catch (error) {}
+    });
+  }
+  showHomeSuccess();
+})();
