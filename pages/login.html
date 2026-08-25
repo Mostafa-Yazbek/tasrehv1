@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#064239" />
+  <link rel="icon" type="image/png" href="../assets/images/damascus-eagle.png" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <title>تسجيل الدخول | لوحة التحكم</title>
+</head>
+<style>
+/* ─── Login Page ─── */
+.login-container {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+.login-header {
+  text-align: center;
+}
+.login-logo {
+  display: block;
+  width: 120px;
+  height: 170px;
+  margin: -130px auto -10px;
+  object-fit: contain;
+}
+.login-header h1 {
+  margin: -30px 0 var(--space-1);
+  color: var(--color-golden-wheat-200);
+  font-family: var(--font-display-bold);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  line-height: 1;
+}
+.login-header p {
+  margin: 0;
+  color: var(--color-golden-wheat-300);
+  font-size: var(--text-sm);
+}
+.login-card {
+  width: 100%;
+  border: 1px solid rgba(188,163,117,.42);
+}
+.login-fields {
+  grid-template-columns: 1fr;
+}
+.login-form {
+  display: grid;
+  gap: var(--space-4);
+}
+.login-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+.login-submit { width: 100%; }
+.login-hint {
+  margin: 0;
+  color: var(--color-golden-wheat-300);
+  font-size: var(--text-xs);
+  opacity: .7;
+}
+
+/* ─── Dashboard Layout ─── */
+.dash-workspace {
+  width: min(1280px, 100%);
+}
+.dash-topbar {
+  min-height: 72px !important;
+}
+.dash-topbar .compact-brand span {
+  color: var(--color-golden-wheat-200);
+  font-family: var(--font-display-bold);
+  font-size: var(--text-lg);
+}
+.dash-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.dash-user-badge {
+  padding: var(--space-1) var(--space-3);
+  color: var(--color-golden-wheat-200);
+  background: rgba(255,255,255,.08);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-title);
+  font-size: var(--text-xs);
+}
+.dash-logout {
+  color: var(--color-golden-wheat-300) !important;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.dash-logout:hover {
+  background: rgba(255,255,255,.08) !important;
+}
+.dash-page {
+  padding-top: var(--space-6) !important;
+}
+
+/* ─── Stats Cards ─── */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-5) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-golden-wheat-200);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.stat-value {
+  direction: ltr;
+  color: var(--color-brand);
+  font-family: var(--font-display-bold);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1;
+}
+.stat-label {
+  color: var(--color-text-muted);
+  font-family: var(--font-title);
+  font-size: var(--text-xs);
+}
+.stat-granted .stat-value { color: #1a7a5a; }
+.stat-active .stat-value { color: #237366; }
+.stat-progress .stat-value { color: #b08d3e; }
+.stat-rejected .stat-value { color: var(--color-umber-700); }
+
+/* ─── Filters ─── */
+.dash-filters {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-golden-wheat-200);
+}
+.dash-filters-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.dash-filter-field {
+  flex: 1;
+  min-width: 160px;
+}
+.dash-filter-field .field-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.dash-filter-field .field-input {
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-golden-wheat-50);
+  border: 1px solid var(--color-golden-wheat-200);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+}
+.dash-filter-field .field-input:focus {
+  background: var(--color-surface);
+  border-color: var(--color-brand);
+}
+.dash-filter-action {
+  flex: 0 0 auto;
+  min-width: auto;
+}
+
+/* ─── Permits List ─── */
+.dash-permits {
+  margin-bottom: var(--space-8);
+}
+.dash-permits-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+.dash-permits-head h2 {
+  margin: 0;
+  color: var(--color-brand);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+}
+.dash-permits-count {
+  padding: var(--space-1) var(--space-3);
+  color: var(--color-text-muted);
+  background: var(--color-brand-soft);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  direction: ltr;
+}
+.dash-permits-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.dash-permits-empty {
+  text-align: center;
+  padding: var(--space-10);
+  color: var(--color-text-faint);
+  font-size: var(--text-sm);
+}
+
+/* ─── Permit Row Card ─── */
+.permit-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-golden-wheat-200);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+.permit-row:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-golden-wheat-300);
+}
+.permit-row:active {
+  transform: scale(.99);
+}
+
+.permit-row-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  background: var(--color-brand-soft);
+  border-radius: var(--radius-sm);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.permit-row-body {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.permit-row-title {
+  color: var(--color-brand);
+  font-family: var(--font-title);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.permit-row-sub {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-faint);
+  font-size: var(--text-xs);
+}
+.permit-row-sub span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.permit-row-number {
+  direction: ltr;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+}
+
+.permit-row-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  text-align: left;
+  white-space: nowrap;
+}
+.permit-row-date {
+  color: var(--color-text-faint);
+  font-size: var(--text-2xs);
+  font-family: var(--font-mono);
+  direction: ltr;
+}
+.permit-row-stage {
+  color: var(--color-text-muted);
+  font-size: var(--text-2xs);
+  font-family: var(--font-title);
+}
+.permit-row-reason {
+  max-width: 180px;
+  color: var(--color-umber-700);
+  font-size: var(--text-2xs);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.permit-row-arrow {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: var(--color-text-faint);
+  background: var(--color-golden-wheat-50);
+  border-radius: 50%;
+  font-family: Arial, sans-serif;
+  font-size: .9rem;
+  flex-shrink: 0;
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+.permit-row:hover .permit-row-arrow {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  transform: translateX(-3px);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px var(--space-3);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-title);
+  font-size: var(--text-2xs);
+  white-space: nowrap;
+}
+.status-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-granted { color: #1a7a5a; background: #e6f5ee; }
+.status-granted::before { background: #1a7a5a; }
+.status-active { color: #237366; background: #d9f2ed; }
+.status-active::before { background: #237366; animation: pulse-dot 2s infinite; }
+.status-expired { color: var(--color-charcoal-500); background: var(--color-golden-wheat-100); }
+.status-expired::before { background: var(--color-charcoal-300); }
+.status-progress { color: #8a6d1b; background: #fdf4e0; }
+.status-progress::before { background: #c9a030; }
+.status-rejected { color: var(--color-umber-700); background: var(--color-umber-50); }
+.status-rejected::before { background: var(--color-umber-700); }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+
+</style>
+<body class="auth-shell">
+  <div class="login-container">
+    <header class="login-header">
+      <img src="../assets/images/لوغو 1.png" class="login-logo" alt="شعار محافظة دمشق" />
+      <h1>لوحة التحكم</h1>
+      <p>منصة تصريح — إدارة ومتابعة التصاريح</p>
+    </header>
+
+    <div class="login-card form-card">
+      <div class="card-head">
+        <div>
+          <h2 class="card-title">تسجيل الدخول</h2>
+        </div>
+      </div>
+      <form class="login-form" data-dashboard-login novalidate>
+        <div class="form-grid login-fields">
+          <div class="field field-wide">
+            <label class="field-label" for="login_username">اسم المستخدم</label>
+            <input id="login_username" name="login_username" class="field-input" type="text" autocomplete="username" placeholder="أدخل اسم المستخدم" required />
+          </div>
+          <div class="field field-wide">
+            <label class="field-label" for="login_password">كلمة المرور</label>
+            <input id="login_password" name="login_password" class="field-input" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required />
+          </div>
+        </div>
+        <p class="access-error" data-login-error hidden role="alert">يرجى إدخال اسم المستخدم وكلمة المرور.</p>
+        <div class="login-actions">
+          <button type="submit" class="btn btn-primary btn-lg login-submit">تسجيل الدخول <span aria-hidden="true">←</span></button>
+          <a href="../index.html" class="btn btn-ghost">العودة للرئيسية</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+      var form = document.querySelector("[data-dashboard-login]");
+      var error = document.querySelector("[data-login-error]");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var u = form.querySelector("[name='login_username']");
+        var p = form.querySelector("[name='login_password']");
+        if (!u.value.trim() || !p.value.trim()) {
+          if (error) error.hidden = false;
+          if (u && !u.value.trim()) u.focus();
+          else if (p) p.focus();
+          return;
+        }
+        if (error) error.hidden = true;
+        try { sessionStorage.setItem("musarrah-dashboard-user", JSON.stringify({ name: u.value.trim(), time: Date.now() })); } catch (err) {}
+        window.location.assign("dashboard.html");
+      });
+    })();
+  </script>
+</body>
+</html>

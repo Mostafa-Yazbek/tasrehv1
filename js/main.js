@@ -37,9 +37,39 @@
     document.head.appendChild(css);
   }
 
-  function machineryRow(index) {
-    return '<tr data-machinery-row><td data-label="نوع الآلية"><input class="field-input" type="text" name="machinery[' + index + '][type]" placeholder="مثال: حفارة"></td><td data-label="العدد"><input class="field-input mono" type="number" min="1" step="1" name="machinery[' + index + '][count]"></td><td data-label="ارتفاع الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[' + index + '][height]" placeholder="متر"></td><td data-label="وزن الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[' + index + '][weight]" placeholder="كغ"></td><td data-label="ملاحظات"><input class="field-input" type="text" name="machinery[' + index + '][notes]"></td><td data-label="حذف"><button class="repeater-remove" type="button" data-remove-machinery aria-label="حذف صف الآلية">×</button></td></tr>';
-  }
+function machineryRow(index) {
+  return '<tr data-machinery-row>' +
+
+    '<td data-label="نوع الآلية">' +
+      '<select class="field-input" name="machinery[' + index + '][type]">' +
+        '<option value="" selected disabled>اختر نوع الآلية</option>' +
+        '<option value="mixer">جبالة</option>' +
+        '<option value="buger">باغير</option>' +
+      '</select>' +
+    '</td>' +
+
+    '<td data-label="العدد">' +
+      '<input class="field-input mono" type="number" min="1" step="1" name="machinery[' + index + '][count]">' +
+    '</td>' +
+
+    '<td data-label="ارتفاع الآلية">' +
+      '<input class="field-input mono" type="number" min="0" step="0.01" name="machinery[' + index + '][height]" placeholder="متر">' +
+    '</td>' +
+
+    '<td data-label="وزن الآلية">' +
+      '<input class="field-input mono" type="number" min="0" step="0.01" name="machinery[' + index + '][weight]" placeholder="كغ">' +
+    '</td>' +
+
+    '<td data-label="ملاحظات">' +
+      '<input class="field-input" type="text" name="machinery[' + index + '][notes]">' +
+    '</td>' +
+
+    '<td data-label="حذف">' +
+      '<button class="repeater-remove" type="button" data-remove-machinery aria-label="حذف صف الآلية">×</button>' +
+    '</td>' +
+
+  '</tr>';
+}
 
   function updateMachineryRows() {
     var rows = document.querySelectorAll("[data-machinery-rows] [data-machinery-row]");
@@ -63,7 +93,7 @@
     if (!card || !actions) return;
     var section = document.createElement("section");
     section.className = "machinery-subsection";
-    section.innerHTML = '<div class="transport-table-wrap"><table class="transport-material-table machinery-table"><thead><tr><th>نوع الآلية</th><th>العدد</th><th>ارتفاع الآلية</th><th>وزن الآلية</th><th>ملاحظات</th><th aria-label="حذف"></th></tr></thead><tbody data-machinery-rows><tr data-machinery-row><td data-label="نوع الآلية"><input class="field-input" type="text" name="machinery[0][type]"></td><td data-label="العدد"><input class="field-input mono" type="number" min="1" step="1" name="machinery[0][count]"></td><td data-label="ارتفاع الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[0][height]" placeholder="متر"></td><td data-label="وزن الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[0][weight]" placeholder="كغ"></td><td data-label="ملاحظات"><input class="field-input" type="text" name="machinery[0][notes]"></td><td data-label="حذف"><button class="repeater-remove" type="button" data-remove-machinery aria-label="حذف صف الآلية">×</button></td></tr></tbody></table></div><button type="button" class="btn btn-soft btn-sm transport-add-row" data-add-machinery><span aria-hidden="true">+</span> إضافة آلية</button>';
+    section.innerHTML = '<div class="transport-table-wrap"><table class="transport-material-table machinery-table"><thead><tr><th>نوع الآلية</th><th>العدد</th><th>ارتفاع الآلية</th><th>وزن الآلية</th><th>ملاحظات</th><th aria-label="حذف"></th></tr></thead><tbody data-machinery-rows><tr data-machinery-row><td data-label="نوع الآلية"><select class="field-input" name="machinery[0][type]"><option value="" selected disabled>اختر نوع الآلية</option><option value="mixer">جبالة</option><option value="buger">باغير</option></select></td><td data-label="العدد"><input class="field-input mono" type="number" min="1" step="1" name="machinery[0][count]"></td><td data-label="ارتفاع الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[0][height]" placeholder="متر"></td><td data-label="وزن الآلية"><input class="field-input mono" type="number" min="0" step="0.01" name="machinery[0][weight]" placeholder="كغ"></td><td data-label="ملاحظات"><input class="field-input" type="text" name="machinery[0][notes]"></td><td data-label="حذف"><button class="repeater-remove" type="button" data-remove-machinery aria-label="حذف صف الآلية">×</button></td></tr></tbody></table></div><button type="button" class="btn btn-soft btn-sm transport-add-row" data-add-machinery><span aria-hidden="true">+</span> إضافة آلية</button>';
     actions.insertAdjacentElement("beforebegin", section);
   }
 
@@ -143,4 +173,71 @@
     });
   }
   showHomeSuccess();
+})();
+/* ========================================================
+   Rubble Cost Calculation
+   1 KG = 70 SYP
+   ======================================================== */
+(function () {
+  "use strict";
+
+  var PRICE_PER_KG = 70;
+
+  function formatCurrency(value) {
+    return Number(value).toLocaleString("ar-SY") + " ل.س";
+  }
+
+  function calculateRubbleCost() {
+    var rows = document.querySelectorAll(
+      "[data-rubble-rows] [data-rubble-row]"
+    );
+
+    var total = 0;
+
+    rows.forEach(function (row) {
+      var quantityInput = row.querySelector(".rubble-quantity");
+      var costInput = row.querySelector(".rubble-cost");
+      var hiddenCost = row.querySelector(
+        'input[type="hidden"][name$="[cost]"]'
+      );
+
+      var quantity = parseFloat(quantityInput ? quantityInput.value : 0) || 0;
+
+      var cost = quantity * PRICE_PER_KG;
+
+      total += cost;
+
+      if (costInput) {
+        costInput.value = formatCurrency(cost);
+      }
+
+      if (hiddenCost) {
+        hiddenCost.value = cost;
+      }
+    });
+
+    var totalElement = document.querySelector("[data-rubble-total-cost]");
+
+    if (totalElement) {
+      totalElement.textContent = formatCurrency(total);
+    }
+  }
+
+  document.addEventListener("input", function (event) {
+    if (event.target.matches(".rubble-quantity")) {
+      calculateRubbleCost();
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    if (
+      event.target.closest("[data-add-rubble]") ||
+      event.target.closest("[data-remove-rubble]")
+    ) {
+      setTimeout(calculateRubbleCost, 0);
+    }
+  });
+
+  calculateRubbleCost();
+
 })();

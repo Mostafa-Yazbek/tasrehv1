@@ -1,31 +1,121 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="icon" type="image/png" href="../assets/images/damascus-eagle.png" /><link rel="stylesheet" href="../css/variables.css" /><link rel="stylesheet" href="../css/style.css" /><link rel="stylesheet" href="../css/excavation-access.css" /><title>تصريح حفر | تصرّيح</title></head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../assets/images/damascus-eagle.png" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/excavation-access.css" />
+  <title>تصريح حفر | تصرّيح</title>
+</head>
 <body class="permit-shell">
   <div class="permit-workspace">
-    <header class="permit-topbar"><a class="back-link" href="../index.html"><span aria-hidden="true">←</span> أنواع التصاريح</a><div class="compact-brand"><span></span><img src="../assets/images/لوغو 1.png" alt="شعار محافظة دمشق" /></div></header>
+    <header class="permit-topbar">
+      <div class="compact-brand">
+        <img src="../assets/images/لوغو 1.png" alt="شعار محافظة دمشق" />
+        <h1 class="topbar-title">تصريح حفر</h1>
+      </div>
+      <a class="back-link" href="../index.html">
+        <span aria-hidden="true">←</span> أنواع التصاريح
+      </a>
+    </header>
+
     <main class="permit-page">
-      <header class="page-intro"><p class="eyebrow">إدارة التصاريح</p><h1>تصريح حفر</h1><p>تسجيل دخول فقط للجهات الحكومية المخولة لطلبات الحفر</p></header>
-      <section class="excavation-access form-card" data-excavation-access aria-labelledby="excavation-access-title">
-        <br>
-        <h2 id="excavation-access-title">تسجيل دخول الجهات الحكومية</h2>
-        <p class="excavation-access-notice"><strong>تنبيه مهم:</strong> هذا التصريح مخصص فقط للجهات الحكومية ولا يشمل المواطنين أو الجهات العامة.</p>
-        <form class="excavation-login-form" data-excavation-login novalidate>
-          <div class="field"><label class="field-label" for="government_username">اسم المستخدم</label><input id="government_username" name="government_username" class="field-input" type="text" autocomplete="username" placeholder="اسم المستخدم " required /></div>
-          <div class="field"><label class="field-label" for="government_password">كلمة المرور</label><input id="government_password" name="government_password" class="field-input" type="password" autocomplete="current-password" placeholder="أدخل كلمة المرور" required /></div>
-          <p class="access-error" data-access-error hidden role="alert">يرجى إدخال اسم المستخدم وكلمة المرور للمتابعة.</p>
-          <button type="submit" class="btn btn-primary btn-lg">تسجيل الدخول <span aria-hidden="true">←</span></button>
-        <br>
-        </form>
-      </section>
-      <form class="form excavation-form" data-static-form data-excavation-request novalidate hidden>
-        <section class="form-card"><div class="card-head"><h2 class="card-title"><img src="../assets/images/file-text-pineal-700.svg" alt="" />بيانات مقدم الطلب</h2></div><div class="form-grid"><div class="field"><label class="field-label" for="excavation_applicant">مقدم الطلب</label><select id="excavation_applicant" name="excavation_applicant" class="field-input"><option value="" selected disabled>اختر مقدم الطلب</option><option value="water_company">شركة المياه</option><option value="electricity_company">شركة الكهرباء</option><option value="telephone_company">شركة الهاتف</option><option value="sanitation_company">شركة الصرف الصحي</option><option value="other">غير ذلك</option></select></div><div class="field"><label class="field-label" for="excavation_location">تحديد موقع الحفر</label><input id="excavation_location" name="excavation_location" class="field-input" type="text" placeholder="اكتب موقع الحفر" /></div><div class="field field-wide"><label class="field-label" for="excavation_reason">السبب</label><textarea id="excavation_reason" name="excavation_reason" class="field-input permit-textarea" placeholder="اكتب سبب الحفر"></textarea></div></div></section>
-        <section class="form-card"><div class="card-head"><h2 class="card-title"><img src="../assets/images/file-text-pineal-700.svg" alt="" />مواصفات الحفر</h2></div><div class="form-grid excavation-dimensions"><div class="field"><label class="field-label" for="excavation_height">الارتفاع</label><input id="excavation_height" name="excavation_height" class="field-input mono" type="number" min="0" step="0.01" placeholder="متر" /></div><div class="field"><label class="field-label" for="excavation_length">الطول</label><input id="excavation_length" name="excavation_length" class="field-input mono" type="number" min="0" step="0.01" placeholder="متر" /></div><div class="field"><label class="field-label" for="excavation_width">العرض</label><input id="excavation_width" name="excavation_width" class="field-input mono" type="number" min="0" step="0.01" placeholder="متر" /></div></div></section>
-        <div class="form-actions"><button type="submit" class="btn btn-primary btn-lg">إرسال الطلب</button><button type="reset" class="btn btn-ghost">إلغاء</button></div>
+      
+      <!-- نموذج تقديم طلب تصريح الحفر -->
+      <form class="form excavation-form" data-static-form data-excavation-request novalidate>
+        <section class="form-card">
+          <div class="card-head">
+            <h2 class="card-title"><img src="../assets/images/file-text-pineal-700.svg" alt="" />بيانات مقدم الطلب</h2>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="excavation_applicant">مقدم الطلب</label>
+              <select id="excavation_applicant" name="excavation_applicant" class="field-input">
+                <option value="" selected disabled>اختر مقدم الطلب</option>
+                <option value="water_company">شركة المياه</option>
+                <option value="electricity_company">شركة الكهرباء</option>
+                <option value="telephone_company">شركة الهاتف</option>
+                <option value="sanitation_company">شركة الصرف الصحي</option>
+                <option value="other">غير ذلك</option>
+              </select>
+            </div>
+
+            <!-- حقل الموقع (يدوي أو عبر GPS) -->
+            <div class="field">
+              <label class="field-label" for="excavation_location">
+                <span>تحديد موقع الحفر</span>
+              </label>
+              <div class="location-input-group">
+                <input id="excavation_location" name="excavation_location" class="field-input" type="text" placeholder="اكتب الموقع يدوياً أو اضغط زر الـ GPS" />
+                <button type="button" class="btn btn-gps" id="btn-get-gps" title="تحديد الموقع الحالي عبر GPS">
+                  📍 تحديد عبر GPS
+                </button>
+              </div>
+              <span class="field-hint" id="gps-status"></span>
+            </div>
+
+            <div class="field field-wide">
+              <label class="field-label" for="excavation_reason">السبب</label>
+              <textarea id="excavation_reason" name="excavation_reason" class="field-input permit-textarea" placeholder="اكتب سبب الحفر"></textarea>
+            </div>
+          </div>
+        </section>
+        
+        <section class="form-card">
+          <div class="card-head">
+            <h2 class="card-title"><img src="../assets/images/file-text-pineal-700.svg" alt="" />مواصفات الحفر</h2>
+          </div>
+          <div class="form-grid excavation-dimensions">
+            <div class="field"><label class="field-label" for="excavation_height">الارتفاع</label><input id="excavation_height" name="excavation_height" class="field-input mono" type="number" min="0" step="0.01" placeholder="متر" /></div>
+            <div class="field"><label class="field-label" for="excavation_length">الطول</label><input id="excavation_length" name="excavation_length" class="field-input mono" type="number" min="0" step="0.01" placeholder="متر" /></div>
+            <div class="field"><label class="field-label" for="excavation_width">العرض</label><input id="excavation_width" name="excavation_width" class="field-input mono" type="number" min="0" step="0.01" placeholder="متر" /></div>
+          </div>
+        </section>
+
+        <!-- أزرار الإجراءات: إلغاء على اليمين وإرسال الطلب على اليسار -->
+        <div class="form-actions excavation-actions">
+          <button type="reset" class="btn btn-ghost btn-lg">إلغاء</button>
+          <button type="submit" class="btn btn-primary btn-lg">إرسال الطلب <span aria-hidden="true">✓</span></button>
+        </div>
       </form>
     </main>
   </div>
+
   <script src="../js/main.js"></script>
   <script src="../js/excavation-access.js"></script>
+  
+  <!-- سكريبت جلب موقع الـ GPS -->
+  <script>
+    document.getElementById('btn-get-gps')?.addEventListener('click', function() {
+      const locationInput = document.getElementById('excavation_location');
+      const statusText = document.getElementById('gps-status');
+      
+      if (!navigator.geolocation) {
+        statusText.textContent = "متصفحك لا يدعم خاصية تحديد الموقع (GPS).";
+        statusText.style.color = "var(--color-danger-strong)";
+        return;
+      }
+
+      statusText.textContent = "جاري جلب الإحداثيات...";
+      statusText.style.color = "var(--color-brand)";
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude.toFixed(6);
+          const lng = position.coords.longitude.toFixed(6);
+          locationInput.value = `موقع GPS: ${lat}, ${lng}`;
+          statusText.textContent = "تم تحديد الموقع بنجاح عبر GPS ✓";
+          statusText.style.color = "var(--color-brand)";
+        },
+        (error) => {
+          statusText.textContent = "تعذر الحصول على الموقع، يرجى تفعيل الـ GPS وإعطاء الإذن أو الكتابة يدوياً.";
+          statusText.style.color = "var(--color-danger-strong)";
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    });
+  </script>
 </body>
 </html>

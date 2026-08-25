@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#064239" />
+
+  <link rel="icon" type="image/png" href="../assets/images/damascus-eagle.png" />
+
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <title>تسجيل الدخول | تصريح حفر</title>
+</head>
+
+<style>
+/* =========================================
+   Excavation Login
+   نفس هوية تسجيل دخول لوحة التحكم
+   ========================================= */
+
+.excavation-login-container {
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.excavation-login-header {
+  text-align: center;
+}
+
+.excavation-login-logo {
+  display: block;
+  width: 120px;
+  height: 170px;
+  margin: -130px auto -10px;
+  object-fit: contain;
+}
+
+.excavation-login-header h1 {
+  margin: -30px 0 var(--space-1);
+  color: var(--color-golden-wheat-200);
+  font-family: var(--font-display-bold);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  line-height: 1;
+}
+
+.excavation-login-header p {
+  margin: 0;
+  color: var(--color-golden-wheat-300);
+  font-size: var(--text-sm);
+}
+
+.excavation-login-card {
+  width: 100%;
+  border: 1px solid rgba(188, 163, 117, .42);
+}
+
+.excavation-login-fields {
+  grid-template-columns: 1fr;
+}
+
+.excavation-login-form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.excavation-login-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.excavation-login-submit {
+  width: 100%;
+}
+
+.excavation-login-hint {
+  margin: 0;
+  color: var(--color-golden-wheat-300);
+  font-size: var(--text-xs);
+  opacity: .7;
+  text-align: center;
+}
+
+.excavation-login-notice {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-muted);
+  background: var(--color-golden-wheat-50);
+  border: 1px solid var(--color-golden-wheat-200);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  line-height: 1.8;
+  text-align: center;
+}
+
+.excavation-login-notice strong {
+  color: var(--color-brand);
+}
+</style>
+
+
+<body class="auth-shell">
+
+  <div class="excavation-login-container">
+
+    <!-- =========================================
+         رأس الصفحة
+         ========================================= -->
+    <header class="excavation-login-header">
+
+      <img
+        src="../assets/images/لوغو 1.png"
+        class="excavation-login-logo"
+        alt="شعار محافظة دمشق"
+      />
+
+      <h1>تصريح حفر</h1>
+
+      <p>
+        منصة تصريح — طلبات الحفر للجهات الحكومية
+      </p>
+
+    </header>
+
+
+    <!-- =========================================
+         بطاقة تسجيل الدخول
+         ========================================= -->
+    <div class="excavation-login-card form-card">
+
+      <div class="card-head">
+
+        <div>
+          <h2 class="card-title">
+            تسجيل دخول فقط للجهات الحكومية المخولة لطلبات الحفر  
+          </h2>
+        </div>
+
+      </div>
+
+
+      <form
+        class="excavation-login-form"
+        data-excavation-login
+        novalidate
+      >
+
+        <!-- تنبيه -->
+        <div class="excavation-login-notice">
+
+          <strong>تنبيه مهم:</strong>
+
+          هذا التصريح مخصص فقط للجهات الحكومية
+          المخولة بتقديم طلبات الحفر.
+
+        </div>
+
+
+        <div class="form-grid excavation-login-fields">
+
+          <!-- اسم المستخدم -->
+          <div class="field field-wide">
+
+            <label
+              class="field-label"
+              for="government_username"
+            >
+              اسم المستخدم
+            </label>
+
+            <input
+              id="government_username"
+              name="government_username"
+              class="field-input"
+              type="text"
+              autocomplete="username"
+              placeholder="أدخل اسم المستخدم"
+              required
+            />
+
+          </div>
+
+
+          <!-- كلمة المرور -->
+          <div class="field field-wide">
+
+            <label
+              class="field-label"
+              for="government_password"
+            >
+              كلمة المرور
+            </label>
+
+            <input
+              id="government_password"
+              name="government_password"
+              class="field-input"
+              type="password"
+              autocomplete="current-password"
+              placeholder="أدخل كلمة المرور"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- رسالة الخطأ -->
+        <p
+          class="access-error"
+          data-excavation-login-error
+          hidden
+          role="alert"
+        >
+          يرجى إدخال اسم المستخدم وكلمة المرور.
+        </p>
+
+
+        <!-- الإجراءات -->
+        <div class="excavation-login-actions">
+
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg excavation-login-submit"
+          >
+            تسجيل الدخول
+
+            <span aria-hidden="true">←</span>
+          </button>
+
+
+          <a
+            href="../index.html"
+            class="btn btn-ghost"
+          >
+            العودة للرئيسية
+          </a>
+
+        </div>
+
+
+        <p class="excavation-login-hint">
+          الدخول متاح فقط للجهات الحكومية المخولة بطلبات الحفر.
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       Login Logic
+       ========================================= -->
+  <script>
+
+    (function () {
+
+      "use strict";
+
+      var form = document.querySelector(
+        "[data-excavation-login]"
+      );
+
+      var error = document.querySelector(
+        "[data-excavation-login-error]"
+      );
+
+
+      if (!form) return;
+
+
+      form.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+
+        var username = form.querySelector(
+          "[name='government_username']"
+        );
+
+        var password = form.querySelector(
+          "[name='government_password']"
+        );
+
+
+        /*
+         * التحقق من الحقول
+         */
+        if (
+          !username.value.trim() ||
+          !password.value.trim()
+        ) {
+
+          if (error) {
+            error.hidden = false;
+          }
+
+
+          if (!username.value.trim()) {
+
+            username.focus();
+
+          } else {
+
+            password.focus();
+
+          }
+
+          return;
+        }
+
+
+        if (error) {
+          error.hidden = true;
+        }
+
+
+        /*
+         * حفظ بيانات الجلسة بشكل مؤقت
+         */
+        try {
+
+          sessionStorage.setItem(
+            "musarrah-excavation-user",
+            JSON.stringify({
+              username: username.value.trim(),
+              time: Date.now()
+            })
+          );
+
+        } catch (err) {}
+
+
+        /*
+         * الانتقال إلى صفحة طلب الحفر
+         */
+        window.location.assign(
+          "excavation.html"
+        );
+
+      });
+
+    })();
+
+  </script>
+
+</body>
+
+</html>
