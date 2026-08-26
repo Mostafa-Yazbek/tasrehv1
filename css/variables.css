@@ -1,16 +1,42 @@
 /* Musarrah reference variables: copied from the supplied design system and kept framework-free. */
-@font-face { font-family: "thmanyahserifdisplay-black"; src: url("../assets/fonts/thmanyahserifdisplay-Black.woff2") format("woff2"); font-display: swap; }
-@font-face { font-family: "thmanyahserifdisplay-bold"; src: url("../assets/fonts/thmanyahserifdisplay-Bold.woff2") format("woff2"); font-display: swap; }
-@font-face { font-family: "thmanyahseriftext"; src: url("../assets/fonts/thmanyahseriftext-Regular.woff2") format("woff2"); font-display: swap; }
-@font-face { font-family: "thmanyahseriftext-medium"; src: url("../assets/fonts/thmanyahseriftext-Medium.woff2") format("woff2"); font-display: swap; }
-@font-face { font-family: "thmanyahseriftext-bold"; src: url("../assets/fonts/thmanyahseriftext-Bold.woff2") format("woff2"); font-display: swap; }
+@font-face {
+    font-family: "ITF Qomra Arabic";
+    src: url("../assets/fonts/itfQomraArabic-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITF Qomra Arabic";
+    src: url("../assets/fonts/itfQomraArabic-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITF Qomra Arabic";
+    src: url("../assets/fonts/itfQomraArabic-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "ITF Qomra Arabic";
+    src: url("../assets/fonts/itfQomraArabic-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
-  --font-display: "thmanyahserifdisplay-black", serif;
-  --font-display-bold: "thmanyahserifdisplay-bold", serif;
-  --font-title: "thmanyahseriftext-bold", serif;
-  --font-body: "thmanyahseriftext", serif;
-  --font-body-medium: "thmanyahseriftext-medium", serif;
+  --font-display: "ITF Qomra Arabic", sans-serif;
+  --font-display-bold: "ITF Qomra Arabic", sans-serif;
+  --font-title: "ITF Qomra Arabic", sans-serif;
+  --font-body: "ITF Qomra Arabic", sans-serif;
+  --font-body-medium: "ITF Qomra Arabic", sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
   --text-2xs: .75rem; --text-xs: .8rem; --text-sm: .875rem; --text-md: .94rem; --text-base: 1rem; --text-lg: 1.1rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
   --leading-none: 1; --leading-tight: 1.15; --leading-normal: 1.5;

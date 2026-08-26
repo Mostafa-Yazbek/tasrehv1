@@ -1265,4 +1265,70 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid 
   }
 
 }
+/* =========================================================
+   SCROLL + TOP SPACING
+   ========================================================= */
 
+.auth-shell {
+  min-height: 100dvh;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: flex-start;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding: 24px var(--space-6) 40px;
+}
+
+/* صفحة تسجيل الدخول فقط */
+.auth-shell .login-container,
+.auth-shell .excavation-login-container {
+  width: min(480px, calc(100% - 32px));
+
+  margin: 0 auto;
+
+  padding-top: clamp(20px, 4vh, 50px);
+  padding-bottom: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: var(--space-5);
+
+  box-sizing: border-box;
+}
+
+/* اللوغو */
+.auth-shell .login-logo,
+.auth-shell .excavation-login-logo {
+  margin: 0 auto;
+}
+
+/* الكارت */
+.auth-shell .login-card,
+.auth-shell .excavation-login-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* موبايل */
+@media (max-width: 640px) {
+
+  .auth-shell {
+    padding: 18px 12px 32px;
+  }
+
+  .auth-shell .login-container,
+  .auth-shell .excavation-login-container {
+    width: min(100%, 480px);
+
+    padding-top: 12px;
+    padding-bottom: 32px;
+  }
+}
